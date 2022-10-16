@@ -47,7 +47,7 @@ int main (){
 	
 ::SendMessage(::GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000); // Inicia Modo Tela Cheia
 
-system("color 69"); // Define Cor de fundo e cor de texto
+system("color 60"); // Define Cor de fundo e cor de texto
 get_terminal_size(width, height); // Detecta o tamanho da tela
     
 // Definição do tamanho da fonte
