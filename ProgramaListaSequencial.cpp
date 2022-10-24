@@ -20,7 +20,7 @@ struct NOLLS {
 const int N=5;
 NOLLS lista [N];
 NOLLS val;
-int fim;
+int fim, k, aux;
 bool sinal;
 char conf;
 int width=0, height=0;
@@ -60,7 +60,7 @@ get_terminal_size(width, height); // Detecta o tamanho da tela
      fontex.dwFontSize.X = width-25; // Define o tamanho(largura) da fonte conforme o tamanho da tela;
      fontex.dwFontSize.Y = height-25; // Define o tamanho(Altura) da fonte conforme o tamanho da tela;
      SetCurrentConsoleFontEx(hOut, NULL, &fontex);
-     
+          
     
 setlocale(LC_ALL, "Portuguese");
 
@@ -177,10 +177,48 @@ void lls_1(){
     cout << "\n\t\t";
 	
 }
-
+// unserir na posicao K
 void lls_2(){
-	
-	
+	sinal = false;
+	system("cls");
+	cout << "\n\t\t\tInserir Novo Nó na posição K\n";
+	if (fim < N-1){
+		cout << "\n\t\tinforme a posição: ";
+		cin >> k;
+		if(k >= 0 && k <= fim){
+			cout << "\n\t\tInforme o ID: ";
+			cin >> val.id;
+			fflush(stdin);
+			cout << "\n\t\tInforme o nome do Produto: ";
+			//cin >> val.info;
+			getline (cin, val.produto);
+			fflush(stdin);
+			cout << "\n\t\tInforme o Preço: ";
+			cin >> val.preco;
+			fflush(stdin);
+			cout << "\n\t\tInforme a Quantidade em Estoque: ";
+			cin >> val.qtdEmEstoque;
+			fflush(stdin);
+			cout << "\n\t\tConfirma a Inserção de dados(S/N): ";
+			cin >> conf;
+			fflush(stdin);
+			conf = toupper(conf);
+			if (conf =='S'){
+				fim++;
+				aux = fim;
+				while(aux > k){
+					lista[aux] = lista[aux - 1];
+					aux--;
+				}
+			lista[aux] = val;
+			sinal = true;
+			}
+			else cout << "\n\n\t\tDados não confirmados...";
+		}
+		else cout << "\n\n\t\tnão pertence a lista";
+	}
+	else cout << k << "\n\n\t\tLista Cheia - Overflow\n";
+	cout << "\n\t\t";
 }
 
 void lls_3(){
@@ -238,7 +276,7 @@ void lls_12(){
 
 void lls_13(){
 	
-	 int aux;
+	aux;
     sinal = false;
     system ("cls");
     cout << "\n\t\tImprimir Lista de Produtos\n";
