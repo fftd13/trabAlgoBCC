@@ -20,7 +20,7 @@ struct NOLLS {
 const int N=5;
 NOLLS lista [N];
 NOLLS val;
-int fim, k, aux;
+int fim, k, aux, consultId;
 bool sinal;
 char conf;
 int width=0, height=0;
@@ -221,8 +221,59 @@ void lls_2(){
 	cout << "\n\t\t";
 }
 
+// procurar nó por id e inserir um novo nó posterior ao encontrado
 void lls_3(){
-	
+	sinal = false;
+	system("cls");
+	cout << "\n\t\t\tProcurar um nó por id e inserir um novo nó POSTERIOR ao nó encontrado";
+	if (fim > -1){
+		if (fim < N-1){
+			fim++;
+			cout << "\n\t\tConsultar ID: ";
+			cin >> consultId;
+			fflush(stdin);
+			aux = 0;
+			while(aux != fim && lista[aux].id != consultId){
+				aux++;
+			}
+			if (lista[aux].id == consultId){
+				cout << "\n\t\t\t\t\t ID encontrado !";
+				cout << "\n\t\t Digite os dados do novo produto";
+				fflush(stdin);
+				cout << "\n\t\tInforme o ID: ";
+				cin >> val.id;
+				fflush(stdin);
+				cout << "\n\t\tInforme o nome do Produto: ";
+				//cin >> val.info;
+				getline (cin, val.produto);
+				fflush(stdin);
+				cout << "\n\t\tInforme o Preço: ";
+				cin >> val.preco;
+				fflush(stdin);
+				cout << "\n\t\tInforme a Quantidade em Estoque: ";
+				cin >> val.qtdEmEstoque;
+				fflush(stdin);
+				cout << "\n\t\tConfirma a Inserção de dados(S/N): ";
+				cin >> conf;
+				fflush(stdin);
+				conf = toupper(conf);
+				if (conf == 'S'){
+					int k2 = aux;
+					aux = fim;
+					while (aux >= k2){
+						lista[aux] = lista[aux - 1];
+						aux--;
+					}
+					lista[k2] = val;
+					sinal  = true;
+				}
+				else cout <<"\n\n\t\tDados não confirmados.";
+			}
+			else cout <<"\n\n\t\tID não existe na lista atual";
+		}
+		else cout << "\n\n\tLista Cheia - Overflow";
+	}
+	else cout << "\n\n\tLista vazia.";
 	
 }
 
