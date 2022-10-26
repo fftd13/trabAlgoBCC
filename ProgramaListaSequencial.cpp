@@ -215,7 +215,7 @@ void lls_2(){
 			}
 			else cout << "\n\n\t\tDados não confirmados...";
 		}
-		else cout << "\n\n\t\tnão pertence a lista";
+		else else cout << "\n\n\t\tPosição " << k <<" não pertence a lista";
 	}
 	else cout << k << "\n\n\t\tLista Cheia - Overflow\n";
 	cout << "\n\t\t";
@@ -237,7 +237,7 @@ void lls_3(){
 				aux++;
 			}
 			if (lista[aux].id == consultId){
-				cout << "\n\t\t\t\t\t ID encontrado !";
+				cout << "\n\t\t\t\t\tID encontrado !";
 				cout << "\n\t\t Digite os dados do novo produto";
 				fflush(stdin);
 				cout << "\n\t\tInforme o ID: ";
@@ -277,9 +277,27 @@ void lls_3(){
 	
 }
 
+// consultar o nó anterior ao nó da posicao K
 void lls_4(){
-	
-	
+	sinal = false;
+	system("cls");
+	cout << "\n\t\t\tConsultar o nó anterior ao nó da Posição K;";
+	if (fim > -1){
+		cout << "\n\t\tinforme a posição: ";
+		cin >> k;
+		fflush(stdin);
+		if (k >= 0 && k <= fim){
+			if (k > 0){
+				sinal = true;
+				cout << "\t\t" << setw(7) << "ID" << setw(30) << "Produto"<< setw(15) << "Preço" << setw(20) << "QTD em Estoque" << endl;
+				val = lista[k - 1];
+				cout << "\t\t" << setw(7) << val.id << setw(30) << val.produto << setw(15) << val.preco << setw(20) << val.qtdEmEstoque << endl;
+			}
+			else cout << "\n\n\t\tA posição " << k << " é a primeira da lista.";
+		}
+		else cout << "\n\n\t\tPosição " << k <<" não pertence a lista";
+	}
+	else cout << "\n\n\tLista vazia.";
 }
 
 void lls_5(){
