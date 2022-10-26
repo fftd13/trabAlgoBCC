@@ -258,13 +258,13 @@ void lls_3(){
 				fflush(stdin);
 				conf = toupper(conf);
 				if (conf == 'S'){
-					int k2 = aux;
+					k = aux + 1;
 					aux = fim;
-					while (aux >= k2){
+					while (aux >= k){
 						lista[aux] = lista[aux - 1];
 						aux--;
 					}
-					lista[k2] = val;
+					lista[k] = val;
 					sinal  = true;
 				}
 				else cout <<"\n\n\t\tDados não confirmados.";
