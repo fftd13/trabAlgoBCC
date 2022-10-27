@@ -215,7 +215,7 @@ void lls_2(){
 			}
 			else cout << "\n\n\t\tDados não confirmados...";
 		}
-		else else cout << "\n\n\t\tPosição " << k <<" não pertence a lista";
+		else cout << "\n\n\t\tPosição " << k << " não pertence a lista";
 	}
 	else cout << k << "\n\n\t\tLista Cheia - Overflow\n";
 	cout << "\n\t\t";
@@ -300,8 +300,36 @@ void lls_4(){
 	else cout << "\n\n\tLista vazia.";
 }
 
+// remover na posição K + 3
 void lls_5(){
-	
+	sinal = false;
+	system("cls");
+	cout << "\n\t\t\tRemover na posição K+3;";
+	if (fim > -1){
+		cout << "\n\t\tInforme a posição: ";
+		cin >> k;
+		k += 3;
+		if (k >= 0 && k <= fim){
+			val = lista[k];
+			cout << "\t\t" << setw(7) << "ID" << setw(30) << "Produto"<< setw(15) << "Preço" << setw(20) << "QTD em Estoque" << endl;
+			cout << "\t\t" << setw(7) << val.id << setw(30) << val.produto << setw(15) << val.preco << setw(20) << val.qtdEmEstoque << endl;
+			cout << "\n\n\t\tRemover " << val.produto << " da lista ? (s/n): ";
+			cin >> conf;
+			conf = toupper(conf);
+			if (conf == 'S'){
+				sinal = true;
+				aux = k;
+				while (aux < fim){
+					lista[aux] = lista[aux + 1];
+					aux += 1;
+				}
+				fim--;												
+			}
+			else cout <<"\n\n\t\tDados não confirmados.";
+		}
+		else cout << "\n\n\t\tPosição " << k <<" não pertence a lista";
+	}
+	else cout << "\n\n\tLista vazia.";
 	
 }
 
