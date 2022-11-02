@@ -23,6 +23,7 @@ NOLLS val;
 int fim, k, aux, consultId;
 bool sinal;
 char conf;
+string y;
 int width=0, height=0;
 
 //prototipação das funções
@@ -329,22 +330,102 @@ void lls_5(){
 		}
 		else cout << "\n\n\t\tPosição " << k <<" não pertence a lista";
 	}
-	else cout << "\n\n\tLista vazia.";
+	else cout << "\n\n\t\tLista vazia.";
 	
 }
 
+// procurar um nó e remover o 2ª nó anterior ao encontrado
 void lls_6(){
-	
+	sinal = false;
+	system("cls");
+	cout << "\n\t\t\tProcurar um no e remover o 2º no anterior ao no encontrado";
+	if (fim > -1){
+		k = 0;
+		cout << "\n\t\tInforme a posição: ";
+		cin >> k;
+		k -= 2;
+		if (k >= 0 && k <= fim){
+			val = lista[k];
+			cout << "\t\t" << setw(7) << "ID" << setw(30) << "Produto"<< setw(15) << "Preço" << setw(20) << "QTD em Estoque" << endl;
+			cout << "\t\t" << setw(7) << val.id << setw(30) << val.produto << setw(15) << val.preco << setw(20) << val.qtdEmEstoque << endl;
+			cout << "\n\n\t\tRemover " << val.produto << " da lista ? (s/n): ";
+			cin >> conf;
+			conf = toupper(conf);
+			if (conf == 'S'){
+				sinal = true;
+				aux = k;
+				while (aux < fim){
+					lista[aux] = lista[aux + 1];
+					aux += 1;
+				}
+				fim--;												
+			}
+			else cout <<"\n\n\t\tDados não confirmados.";
+		}
+		else cout << "\n\n\t\tPosição " << k <<" não pertence a lista";
+	}
+	else cout << "\n\n\t\tLista vazia.";
 	
 }
 
+// consultar um nó no inicio da lista
 void lls_7(){
-	
+	sinal = false;
+	system("cls");
+	cout << "\n\t\t\tConsultar um no no inicio da Lista\n";
+	if(fim > -1){
+		val = lista[0];
+		cout << "\t\t" << setw(7) << "ID" << setw(30) << "Produto"<< setw(15) << "Preço" << setw(20) << "QTD em Estoque" << endl;
+		cout << "\t\t" << setw(7) << val.id << setw(30) << val.produto << setw(15) << val.preco << setw(20) << val.qtdEmEstoque << endl;
+	}
+	else cout << "\n\n\t\tLista vazia.";
 	
 }
 
+// Alterar o conteudo de um no com nome de produto igual a Y
 void lls_8(){
-	
+	sinal = false;
+	system("cls");
+	cout << "\n\t\t\tAlterar o conteudo de um no com nome de produto igual a Y\n";
+	if(fim > -1){	
+		cout << "\n\t\tinforme a nome do produto: ";
+		cin >> y;
+		fflush(stdin);
+		aux = 0;
+		while(aux != fim && lista[aux].produto != y){
+			aux++;
+		}
+		if(lista[aux].produto == y){
+			cout << "\n\t\t\t\t\tProduto encontrado !";
+			cout << "\n\t\t Digite os dados do novo produto";
+			fflush(stdin);
+			cout << "\n\t\tInforme o ID: ";
+			cin >> val.id;
+			fflush(stdin);
+			cout << "\n\t\tInforme o nome do Produto: ";
+			//cin >> val.info;
+			getline (cin, val.produto);
+			fflush(stdin);
+			cout << "\n\t\tInforme o Preço: ";
+			cin >> val.preco;
+			fflush(stdin);
+			cout << "\n\t\tInforme a Quantidade em Estoque: ";
+			cin >> val.qtdEmEstoque;
+			fflush(stdin);
+			cout << "\n\t\tConfirma a Inserção de dados(S/N): ";
+			cin >> conf;
+			fflush(stdin);
+			conf = toupper(conf);
+			if(conf == 'S'){
+				lista[aux] = val;
+				sinal = true;
+			}
+			else cout <<"\n\n\t\tDados não confirmados.";
+			
+		}
+		else cout <<"\n\n\t\tProduto não existe na lista atual";
+	}
+	else cout << "\n\n\t\tLista vazia.";
 	
 }
 
