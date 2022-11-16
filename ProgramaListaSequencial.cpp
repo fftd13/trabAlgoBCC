@@ -19,11 +19,13 @@ struct NOLLS {
 //definição de constantes e variáveis globais
 const int N=5;
 NOLLS lista [N];
+NOLLS lista2 [N];
 NOLLS val;
 int fim, k, aux, consultId;
 bool sinal;
 char conf;
 string y;
+float preco;
 int width=0, height=0;
 
 //prototipação das funções
@@ -388,7 +390,7 @@ void lls_8(){
 	system("cls");
 	cout << "\n\t\t\tAlterar o conteudo de um no com nome de produto igual a Y\n";
 	if(fim > -1){	
-		cout << "\n\t\tinforme a nome do produto: ";
+		cout << "\n\t\tinforme o nome do produto: ";
 		cin >> y;
 		fflush(stdin);
 		aux = 0;
@@ -396,7 +398,7 @@ void lls_8(){
 			aux++;
 		}
 		if(lista[aux].produto == y){
-			cout << "\n\t\t\t\t\tProduto encontrado !";
+			cout << "\n\t\t\t\t\tProduto encontrado !\n";
 			cout << "\n\t\t Digite os dados do novo produto";
 			fflush(stdin);
 			cout << "\n\t\tInforme o ID: ";
@@ -429,24 +431,142 @@ void lls_8(){
 	
 }
 
-
+// Procurar um no por preco e alterar o conteudo do no posterior ao no encontrado
 void lls_9(){
-	
+	system("cls");
+	sinal = false;
+	cout << "\n\t\t\tProcurar um no por preco e alterar o conteudo do no posterior ao no encontrado\n";
+	if(fim > -1){
+		if(fim > 0){
+			cout << "\n\t\tinforme o preço do produto: ";
+			cin >> preco;
+			fflush(stdin);
+			aux = 0;
+			while(aux != fim && lista[aux].preco != preco){
+				aux++;
+			}
+			if(aux > 0){
+				if(lista[aux].preco == preco){
+					cout << "\n\t\t\t\t\tProduto encontrado !\n";
+					cout << "\n\t\t Digite os dados do novo produto";
+					fflush(stdin);
+					cout << "\n\t\tInforme o ID: ";
+					cin >> val.id;
+					fflush(stdin);
+					cout << "\n\t\tInforme o nome do Produto: ";
+					//cin >> val.info;
+					getline (cin, val.produto);
+					fflush(stdin);
+					cout << "\n\t\tInforme o Preço: ";
+					cin >> val.preco;
+					fflush(stdin);
+					cout << "\n\t\tInforme a Quantidade em Estoque: ";
+					cin >> val.qtdEmEstoque;
+					fflush(stdin);
+					cout << "\n\t\tConfirma a Inserção de dados(S/N): ";
+					cin >> conf;
+					fflush(stdin);
+					conf = toupper(conf);
+					if(conf == 'S'){
+						lista[aux - 1] = val;
+					}
+					else cout <<"\n\n\t\tDados não confirmados.";
+				}
+				else cout <<"\n\n\t\tPreço não existe na lista atual";
+			}
+			else  cout <<"\n\n\t\tO produto não pode ser o primeiro da lista atual";
+			
+		}
+		else cout << "\n\n\t\tLista possui apenas 1 nó.";
+	}
+	else cout << "\n\n\t\tLista vazia.";
 	
 }
 
+// Imprimir os nos que possuem valores impares menores que R$60,00
 void lls_10(){
-	
+	sinal = false;
+    system ("cls");
+    cout << "\n\t\tImprimir Lista de Produtos\n";
+    if (fim > -1){
+        cout << "\t\t" << setw(7) << "ID" << setw(30) << "Produto"<< setw(15) << "Preço" << setw(20) << "QTD em Estoque" << endl;
+        aux = 0;
+		int precoint;
+		int mod;
+        while (aux <= fim){
+        	if(lista[aux].preco < 60.0){
+        		precoint = (int)lista[aux].preco;
+        		mod = precoint - ((precoint / 2) * 2);
+        		if(mod == 1){
+        			val = lista[aux];
+		            cout << "\t\t" << setw(7) << val.id << setw(30) << val.produto << setw(15) << val.preco << setw(20) << val.qtdEmEstoque << endl;
+		            	
+				}
+	        
+			}
+			aux = aux + 1;
+        }
+        sinal = true;
+    }
+    else cout << "\n\n\t\tLista Vazia...";
+    cout << "\n\t\t";
 	
 }
 
+// Imprimir conteudo da lista em ordem inversa
 void lls_11(){
-	
+	aux;
+    sinal = false;
+    system ("cls");
+    cout << "\n\t\tImprimir conteudo da lista em ordem inversa\n";
+    if (fim > -1){
+        cout << "\t\t" << setw(7) << "ID" << setw(30) << "Produto"<< setw(15) << "Preço" << setw(20) << "QTD em Estoque" << endl;
+        aux = fim;
+        while (aux >= 0){
+             val = lista[aux];
+             cout << "\t\t" << setw(7) << val.id << setw(30) << val.produto << setw(15) << val.preco << setw(20) << val.qtdEmEstoque << endl;
+             aux--;
+        }
+        sinal = true;
+    }
+    else cout << "\n\n\t\tLista Vazia...";
+    cout << "\n\t\t";
 	
 }
 
+// Classificar em ordem crescente de quantidade em estoque
 void lls_12(){
 	
+    sinal = false;
+    system ("cls");
+    if (fim > -1){
+    	aux = 0;
+        cout << "\n\t\tClassificar em ordem crescente de quantidade em estoque\n";
+        while(aux <= fim){
+        	lista2[aux] = lista[aux];
+        	aux++;
+		}
+        for(int i = 0;i <= fim; i++){
+        	for(int j = 0;j <= fim; j++){
+        		if(lista2[i].qtdEmEstoque < lista2[j].qtdEmEstoque){    
+					val = lista2[i];
+        			lista2[i] = lista2[j];
+        			lista2[j] = val;
+				}
+			}
+		}
+		aux = 0;
+		cout << "\t\t" << setw(7) << "ID" << setw(30) << "Produto"<< setw(15) << "Preço" << setw(20) << "QTD em Estoque" << endl;
+		while(aux <= fim){
+			val = lista2[aux];			
+			cout << "\t\t" << setw(7) << val.id << setw(30) << val.produto << setw(15) << val.preco << setw(20) << val.qtdEmEstoque << endl;
+			aux++;
+		}
+		
+        sinal = true;		
+    }
+    else cout << "\n\n\t\tLista Vazia...";
+    cout << "\n\t\t";
 	
 }
 
