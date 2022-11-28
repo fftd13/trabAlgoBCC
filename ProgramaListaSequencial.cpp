@@ -231,7 +231,7 @@ void lls_3(){
 	cout << "\n\t\t\tProcurar um nó por id e inserir um novo nó POSTERIOR ao nó encontrado";
 	if (fim > -1){
 		if (fim < N-1){
-			fim++;
+			
 			cout << "\n\t\tConsultar ID: ";
 			cin >> consultId;
 			fflush(stdin);
@@ -261,6 +261,7 @@ void lls_3(){
 				fflush(stdin);
 				conf = toupper(conf);
 				if (conf == 'S'){
+					fim++;
 					k = aux + 1;
 					aux = fim;
 					while (aux >= k){
